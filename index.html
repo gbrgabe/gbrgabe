@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>n1ll — gabriel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #1e1e1e;
+    --red: #e8321a;
+    --orange: #f07830;
+    --dim: #444;
+    --muted: #666;
+    --text: #d4d0c8;
+    --white: #f0ede6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    cursor: crosshair;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.6); opacity: 0.6; }
+  }
+
+  @keyframes scanline {
+    0% { top: -2px; }
+    100% { top: 100%; }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pulse-dot {
+    width: 7px; height: 7px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease infinite;
+    display: inline-block;
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(56px, 10vw, 120px);
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: -0.04em;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .hero-name .accent { color: var(--red); }
+
+  .hero-sub {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 24px;
+    max-width: 480px;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.35s;
+  }
+
+  .hero-meta {
+    margin-top: 48px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.5s;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .meta-value {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .meta-value.live {
+    color: var(--orange);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* N1LL IMAGE */
+  .n1ll-img {
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
+    object-position: top center;
+    border: 1px solid var(--border);
+    filter: drop-shadow(0 0 18px rgba(0,200,220,0.25));
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.15s;
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 100px 48px;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 48px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text);
+    margin-bottom: 16px;
+    max-width: 460px;
+  }
+
+  .about-text p strong {
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-row:first-child { border-top: 1px solid var(--border); }
+
+  .stat-key {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stat-val {
+    font-size: 13px;
+    color: var(--white);
+    text-align: right;
+  }
+
+  .stat-val.highlight { color: var(--orange); }
+
+  /* LAB */
+  .lab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .lab-card {
+    background: var(--bg);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .lab-card:hover { background: var(--surface); }
+
+  .lab-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--red);
+    transition: height 0.3s ease;
+  }
+
+  .lab-card:hover::after { height: 100%; }
+
+  .card-status {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-done { color: var(--orange); }
+  .status-wip  { color: var(--muted); }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .tag.hot { border-color: var(--red); color: var(--red); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+  }
+
+  .skill-group-title {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .skill-item::before {
+    content: '›';
+    color: var(--red);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .skill-item .badge {
+    margin-left: auto;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+  }
+
+  .skill-item .badge.active {
+    color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  /* CONTACT */
+  #contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-line {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+
+  .contact-line span { color: var(--red); }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: color 0.2s;
+    font-size: 14px;
+  }
+
+  .contact-link:first-child { border-top: 1px solid var(--border); }
+  .contact-link:hover { color: var(--white); }
+  .contact-link:hover .link-arrow { color: var(--red); }
+
+  .link-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .link-value { font-size: 13px; }
+  .link-arrow { font-size: 18px; color: var(--dim); transition: color 0.2s; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer span {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.05em;
+  }
+
+  footer span.right { color: var(--muted); }
+
+  /* N1LL FIGURE */
+  .hero-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 64px;
+  }
+
+  .hero-figure {
+    flex-shrink: 0;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.15s;
+  }
+
+  .figure-svg {
+    width: 180px;
+    filter: drop-shadow(0 0 18px rgba(0,200,220,0.35)) drop-shadow(0 0 6px rgba(0,200,220,0.5));
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes glitch-shift {
+    0%, 90%, 100% { clip-path: none; transform: none; opacity: 1; }
+    92% { clip-path: inset(20% 0 60% 0); transform: translateX(-4px); opacity: 0.8; }
+    94% { clip-path: inset(60% 0 10% 0); transform: translateX(4px); opacity: 0.8; }
+    96% { clip-path: none; transform: none; opacity: 1; }
+  }
+
+  @keyframes circuit-pulse {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.45; }
+  }
+
+  @keyframes eye-glow {
+    0%, 100% { opacity: 0.7; r: 5; }
+    50% { opacity: 1; r: 7; }
+  }
+
+  .figure-wrap {
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .figure-wrap .glitch-layer {
+    animation: glitch-shift 7s ease-in-out infinite;
+  }
+
+  .circuit-bg {
+    animation: circuit-pulse 3s ease-in-out infinite;
+  }
+
+  .eye-cyber {
+    animation: eye-glow 2s ease-in-out infinite;
+  }
+
+  .hero-content {
+    flex: 1;
+  }
+
+  /* SCANLINE EFFECT ON HERO */
+  #hero::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(232,50,26,0.08), transparent);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+  }
+
+  /* CURSOR BLINK */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--red);
+    vertical-align: middle;
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 20px; }
+    section { padding: 72px 24px; }
+    #hero { padding: 100px 24px 64px; }
+    .hero-layout { flex-direction: column; gap: 32px; align-items: center; }
+    .hero-figure { width: 140px; }
+    .figure-svg { width: 120px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-layout">
+
+    <!-- NETWORK BACKGROUND -->
+    <canvas id="tcp-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+    <!-- N1LL IMAGE -->
+    <div class="hero-figure" style="position:relative;z-index:1;">
+      <img src="NILL.jpeg" alt="N1LL" class="n1ll-img"/>
+    </div>
+
+    <!-- HERO TEXT -->
+    <div class="hero-content" style="position:relative;z-index:1;">
+      <div class="hero-label">
+        <span class="pulse-dot"></span>
+        Systems &amp; Network · Brazil → Dublin
+      </div>
+      <h1 class="hero-name">
+        Gabriel
+      </h1>
+      <p class="hero-sub">Junior Sysadmin in the making. Building real infrastructure, one lab at a time.</p>
+
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">Systems Administration</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Studying</span>
+          <span class="meta-value live"><span class="pulse-dot"></span> CCNA</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Available</span>
+          <span class="meta-value">Sep / Oct 2026 · Dublin</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">GitHub</span>
+          <span class="meta-value"><a href="https://github.com/gbrgabe" style="color:var(--orange);text-decoration:none;">gbrgabe</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function() {
+  const canvas = document.getElementById('tcp-canvas');
+  const hero   = document.getElementById('hero');
+  const metaEl = hero.querySelector('.hero-meta');
+
+  function getCanvasHeight() {
+    // End just above the meta-items
+    const heroTop  = hero.getBoundingClientRect().top + window.scrollY;
+    const metaTop  = metaEl.getBoundingClientRect().top + window.scrollY;
+    return Math.max(200, metaTop - heroTop - 16);
+  }
+
+  function resize() {
+    canvas.width  = hero.offsetWidth;
+    canvas.height = getCanvasHeight();
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); buildGraph(); });
+
+  const ctx = canvas.getContext('2d');
+
+  const RED    = '#e8321a';
+  const ORANGE = '#f07830';
+
+  // ── Simplified outlines (normalised 0..1) ─────────────────
+  // Brazil: rough coastal + interior points, left half of canvas
+  const BR_SHAPE = [
+    [0.08,0.18],[0.12,0.10],[0.20,0.06],[0.28,0.04],[0.34,0.08],
+    [0.36,0.14],[0.32,0.20],[0.30,0.28],[0.34,0.34],[0.38,0.30],
+    [0.40,0.36],[0.38,0.44],[0.34,0.50],[0.30,0.58],[0.28,0.68],
+    [0.24,0.76],[0.20,0.84],[0.16,0.92],[0.12,0.84],[0.10,0.72],
+    [0.08,0.60],[0.06,0.48],[0.06,0.38],[0.06,0.28],
+    // interior nodes
+    [0.18,0.30],[0.24,0.22],[0.28,0.40],[0.20,0.52],[0.26,0.62],
+  ];
+
+  // Ireland: compact shape, right half of canvas
+  const IE_SHAPE = [
+    [0.62,0.12],[0.68,0.08],[0.74,0.10],[0.78,0.16],[0.80,0.24],
+    [0.78,0.32],[0.74,0.38],[0.70,0.42],[0.64,0.44],[0.60,0.40],
+    [0.58,0.32],[0.58,0.24],[0.60,0.18],
+    // interior
+    [0.66,0.20],[0.70,0.28],[0.66,0.34],
+  ];
+
+  let nodes = [], edges = [], packets = [];
+  let brNodes = [], ieNodes = [];
+
+  function buildGraph() {
+    nodes = []; edges = []; packets = [];
+    const W = canvas.width, H = canvas.height;
+
+    function shapeToNodes(shape) {
+      return shape.map(([nx, ny]) => ({
+        x: nx * W, y: ny * H,
+        pulse: Math.random() * Math.PI * 2
+      }));
+    }
+
+    brNodes = shapeToNodes(BR_SHAPE);
+    ieNodes = shapeToNodes(IE_SHAPE);
+    nodes   = [...brNodes, ...ieNodes];
+
+    // Edges within Brazil
+    connectCluster(brNodes, W * 0.20);
+    // Edges within Ireland
+    connectCluster(ieNodes, W * 0.16);
+
+    scheduleHandshakes();
+  }
+
+  function connectCluster(cluster, maxD) {
+    for (let i = 0; i < cluster.length; i++) {
+      for (let j = i+1; j < cluster.length; j++) {
+        const dx = cluster[i].x - cluster[j].x;
+        const dy = cluster[i].y - cluster[j].y;
+        if (Math.sqrt(dx*dx+dy*dy) < maxD) {
+          edges.push([nodes.indexOf(cluster[i]), nodes.indexOf(cluster[j])]);
+        }
+      }
+    }
+  }
+
+  // ── Handshake packets ─────────────────────────────────────
+  function scheduleHandshakes() {
+    packets = [];
+
+    // Internal packets within each country
+    spawnInternalHandshakes(brNodes, 0, 3);
+    spawnInternalHandshakes(ieNodes, 1200, 2);
+
+    // Cross-ocean packets: multiple BR↔IE connections
+    // Pick 3 different anchor pairs for varied ocean routes
+    const brRight  = brNodes.reduce((a,b) => a.x > b.x ? a : b);   // rightmost BR
+    const brMid    = brNodes[3];                                      // NE coast BR
+    const brNorth  = brNodes[1];                                      // north BR
+    const ieMid    = ieNodes[6];                                      // west IE
+    const ieSouth  = ieNodes[9];                                      // south IE
+    const ieNorth  = ieNodes[3];                                      // north IE
+
+    const brRIdx = nodes.indexOf(brRight);
+    const brMIdx = nodes.indexOf(brMid);
+    const brNIdx = nodes.indexOf(brNorth);
+    const ieMIdx = nodes.indexOf(ieMid);
+    const ieSIdx = nodes.indexOf(ieSouth);
+    const ieNIdx = nodes.indexOf(ieNorth);
+
+    // Route 1: main handshake (NE Brazil → West Ireland)
+    spawnPacket(brMIdx, ieMIdx, 'SYN',     RED,    400);
+    spawnPacket(ieMIdx, brMIdx, 'SYN-ACK', ORANGE, 1800);
+    spawnPacket(brMIdx, ieMIdx, 'ACK',     RED,    3200);
+
+    // Route 2: data stream (rightmost BR → South Ireland), offset timing
+    spawnPacket(brRIdx, ieSIdx, 'DATA',    ORANGE, 2600);
+    spawnPacket(ieSIdx, brRIdx, 'ACK',     RED,    4400);
+    spawnPacket(brRIdx, ieSIdx, 'DATA',    ORANGE, 6000);
+
+    // Route 3: north link (North BR → North Ireland)
+    spawnPacket(brNIdx, ieNIdx, 'SYN',     RED,    1200);
+    spawnPacket(ieNIdx, brNIdx, 'SYN-ACK', ORANGE, 3000);
+  }
+
+  function spawnInternalHandshakes(cluster, baseDelay, count) {
+    const idxs = cluster.map(n => nodes.indexOf(n));
+    for (let k = 0; k < count; k++) {
+      const ai = idxs[Math.floor(Math.random() * idxs.length)];
+      const bi = idxs[Math.floor(Math.random() * idxs.length)];
+      if (ai === bi) continue;
+      spawnPacket(ai, bi, 'SYN',     RED,    baseDelay + k * 900);
+      spawnPacket(bi, ai, 'SYN-ACK', ORANGE, baseDelay + k * 900 + 900);
+    }
+  }
+
+  function spawnPacket(fromIdx, toIdx, label, color, delayMs) {
+    const speed = label === 'SYN' || label === 'ACK' ? 0.30 : 0.25; // cross-ocean slower
+    packets.push({
+      fromIdx, toIdx, label, color,
+      t: -delayMs / 1000,
+      speed,
+      done: false,
+      cross: Math.abs(nodes[fromIdx].x - nodes[toIdx].x) > canvas.width * 0.15
+    });
+  }
+
+  // ── Draw ──────────────────────────────────────────────────
+  let time = 0;
+
+  function draw(dt) {
+    time += dt;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Edges
+    edges.forEach(([ai, bi]) => {
+      const a = nodes[ai], b = nodes[bi];
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = '#1e1e1e';
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.8;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    });
+
+        // Nodes
+    nodes.forEach(n => {
+      const pulse = 0.5 + 0.5 * Math.sin(time * 1.1 + n.pulse);
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 4 + pulse * 1.5, 0, Math.PI*2);
+      ctx.strokeStyle = '#2a2a2a';
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.3 + pulse * 0.25;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = '#2e2e2e';
+      ctx.globalAlpha = 0.9;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+
+    // Static dashed ocean lines — always visible
+    let crossPairs = new Set();
+    packets.forEach(p => {
+      if (!p.cross) return;
+      const key = [Math.min(p.fromIdx,p.toIdx), Math.max(p.fromIdx,p.toIdx)].join('-');
+      if (crossPairs.has(key)) return;
+      crossPairs.add(key);
+      const a = nodes[p.fromIdx], b = nodes[p.toIdx];
+      const mx = (a.x + b.x) / 2;
+      const my = (a.y + b.y) / 2 - canvas.height * 0.22;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.quadraticCurveTo(mx, my, b.x, b.y);
+      ctx.strokeStyle = '#1e1e1e';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 6]);
+      ctx.globalAlpha = 0.4;
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+    });
+
+    // Packets
+    let allDone = true;
+    packets.forEach(p => {
+      p.t += dt * p.speed;
+      if (p.t < 0) { allDone = false; return; }
+      if (p.t >= 1) { p.done = true; return; }
+      allDone = false;
+
+      const a = nodes[p.fromIdx], b = nodes[p.toIdx];
+
+      // Arc for cross-ocean packets
+      if (p.cross) {
+        const mx = (a.x + b.x) / 2;
+        const my = (a.y + b.y) / 2 - canvas.height * 0.22; // arc upward
+        // draw dashed line (static)
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.quadraticCurveTo(mx, my, b.x, b.y);
+        ctx.strokeStyle = '#1e1e1e';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 6]);
+        ctx.globalAlpha = 0.4;
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.globalAlpha = 1;
+
+        // packet position along quadratic
+        const t = p.t;
+        const px = (1-t)*(1-t)*a.x + 2*(1-t)*t*mx + t*t*b.x;
+        const py = (1-t)*(1-t)*a.y + 2*(1-t)*t*my + t*t*b.y;
+        drawPacketBox(px, py, p.label, p.color);
+      } else {
+        const px = a.x + (b.x - a.x) * p.t;
+        const py = a.y + (b.y - a.y) * p.t;
+        // trail
+        ctx.beginPath();
+        ctx.moveTo(a.x + (b.x-a.x)*Math.max(0,p.t-0.2), a.y + (b.y-a.y)*Math.max(0,p.t-0.2));
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.3;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        drawPacketBox(px, py, p.label, p.color);
+      }
+    });
+
+    if (allDone && packets.length > 0) {
+      setTimeout(() => { buildGraph(); }, 800);
+    }
+  }
+
+  function drawPacketBox(px, py, label, color) {
+    const W = 36, H = 14;
+    ctx.globalAlpha = 0.92;
+    ctx.fillStyle = 'rgba(10,10,10,0.85)';
+    ctx.fillRect(px - W/2, py - H/2, W, H);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(px - W/2, py - H/2, W, H);
+    ctx.fillStyle = color;
+    ctx.font = '6.5px "Space Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label, px, py);
+    ctx.globalAlpha = 1;
+  }
+
+  buildGraph();
+
+  let last = null;
+  function loop(ts) {
+    if (!last) last = ts;
+    const dt = Math.min((ts - last) / 1000, 0.05);
+    last = ts;
+    draw(dt);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-tag">001 — about</div>
+  <h2 class="section-title">Who I am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Gabriel. Currently based in Brazil, heading to Dublin in late 2026 to start my career in IT infrastructure.</p>
+      <p>I learn by doing. My homelab is a <strong>hybrid Proxmox environment</strong> running real infrastructure: OPNsense as a router/firewall, Windows Server Core with Active Directory, DNS, DHCP — all documented on GitHub.</p>
+      <p>No prior professional experience. What I have instead: <strong>hands-on lab work, honest documentation, and the ability to follow through</strong> on whatever I don't know yet.</p>
+      <p>Long-term path: network infrastructure → cybersecurity.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-row">
+        <span class="stat-key">Location</span>
+        <span class="stat-val">Brazil → Dublin, IE</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Timeline</span>
+        <span class="stat-val highlight">Sep / Oct 2026</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Current cert</span>
+        <span class="stat-val highlight">CCNA (in progress)</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Lab node</span>
+        <span class="stat-val">Proxmox VE · office</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Domain</span>
+        <span class="stat-val">office.lab</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Target role</span>
+        <span class="stat-val">Junior Sysadmin · Helpdesk</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAB -->
+<section id="lab">
+  <div class="section-tag">002 — lab</div>
+  <h2 class="section-title">Hybrid Homelab</h2>
+  <div class="lab-grid">
+
+    <div class="lab-card">
+      <div class="card-status status-done"><span class="pulse-dot"></span> done</div>
+      <div class="card-title">OPNsense · VM 100</div>
+      <div class="card-desc">Firewall and router deployed on Proxmox. Dual NIC setup: WAN via physical bridge (vmbr0), LAN via internal bridge (vmbr1). Handles all traffic routing for the lab.</div>
+      <div class="card-tags">
+        <span class="tag">OPNsense</span>
+        <span class="tag">Firewall</span>
+        <span class="tag">vmbr0/1</span>
+        <span class="tag hot">DONE</span>
+      </div>
+    </div>
+
+    <div class="lab-card">
+      <div class="card-status status-done"><span class="pulse-dot"></span> done</div>
+      <div class="card-title">DC01 · VM 101</div>
+      <div class="card-desc">Windows Server 2022 Core. Active Directory DS, DNS with forwarders (8.8.8.8 / 1.1.1.1), DHCP scope 192.168.1.100–200. Disk migrated IDE→SCSI VirtIO.</div>
+      <div class="card-tags">
+        <span class="tag">Windows Server</span>
+        <span class="tag">AD DS</span>
+        <span class="tag">DNS</span>
+        <span class="tag">DHCP</span>
+        <span class="tag hot">DONE</span>
+      </div>
+    </div>
+
+    <div class="lab-card">
+      <div class="card-status status-wip">· planned</div>
+      <div class="card-title">SRV-MON</div>
+      <div class="card-desc">Ubuntu VM for monitoring stack. Zabbix + Grafana via Docker. Network and service observability for the entire lab environment.</div>
+      <div class="card-tags">
+        <span class="tag">Ubuntu</span>
+        <span class="tag">Zabbix</span>
+        <span class="tag">Grafana</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="lab-card">
+      <div class="card-status status-wip">· planned</div>
+      <div class="card-title">SRV-APPS</div>
+      <div class="card-desc">Ubuntu VM for GLPI + MariaDB. IT asset management and service desk simulation — directly relevant to Helpdesk and Junior Sysadmin roles.</div>
+      <div class="card-tags">
+        <span class="tag">Ubuntu</span>
+        <span class="tag">GLPI</span>
+        <span class="tag">MariaDB</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">003 — skills</div>
+  <h2 class="section-title">Stack</h2>
+  <div class="skills-grid">
+
+    <div>
+      <div class="skill-group-title">Infrastructure</div>
+      <ul class="skill-list">
+        <li class="skill-item">Proxmox VE <span class="badge active">hands-on</span></li>
+        <li class="skill-item">Windows Server 2022 Core <span class="badge active">hands-on</span></li>
+        <li class="skill-item">Active Directory / GPO <span class="badge active">hands-on</span></li>
+        <li class="skill-item">DNS / DHCP <span class="badge active">hands-on</span></li>
+        <li class="skill-item">Linux (Ubuntu) <span class="badge active">hands-on</span></li>
+        <li class="skill-item">PowerShell <span class="badge">learning</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="skill-group-title">Networking</div>
+      <ul class="skill-list">
+        <li class="skill-item">CCNA <span class="badge active">studying</span></li>
+        <li class="skill-item">OPNsense / pfSense <span class="badge active">hands-on</span></li>
+        <li class="skill-item">TCP/IP · VLANs · Routing <span class="badge">learning</span></li>
+        <li class="skill-item">Packet Tracer <span class="badge active">hands-on</span></li>
+        <li class="skill-item">Wireshark <span class="badge active">hands-on</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="skill-group-title">Security & Tools</div>
+      <ul class="skill-list">
+        <li class="skill-item">Kali Linux <span class="badge">learning</span></li>
+        <li class="skill-item">Burp Suite <span class="badge">learning</span></li>
+        <li class="skill-item">TryHackMe / HTB <span class="badge active">active</span></li>
+        <li class="skill-item">Git / GitHub <span class="badge active">hands-on</span></li>
+        <li class="skill-item">Docker <span class="badge">learning</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">004 — contact</div>
+  <div class="contact-line">
+    Open to roles in Dublin.<br/>
+    <span>Let's talk.</span><span class="cursor"></span>
+  </div>
+  <div class="contact-links">
+    <a href="https://github.com/gbrgabe" target="_blank" class="contact-link">
+      <div>
+        <div class="link-label">GitHub</div>
+        <div class="link-value">github.com/gbrgabe</div>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a href="mailto:contact@n1ll.dev" class="contact-link">
+      <div>
+        <div class="link-label">Email</div>
+        <div class="link-value">contact@n1ll.dev</div>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a href="https://linkedin.com" target="_blank" class="contact-link">
+      <div>
+        <div class="link-label">LinkedIn</div>
+        <div class="link-value">/in/gabriel</div>
+      </div>
+      <span class="link-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>epi.n1ll · gabriel · 2026</span>
+  <span class="right">Brazil → Dublin, IE · Sep / Oct 2026</span>
+</footer>
+
+</body>
+</html>
