@@ -111,7 +111,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 120px 64px 80px 16px;
+    padding: 120px 48px 80px 16px;
     position: relative;
     overflow: hidden;
   }
@@ -196,17 +196,17 @@
   }
 
   /* N1LL IMAGE */
-  .n1ll-img {
-    width: 400px;
+    .n1ll-img {
+    width: 300px;
     height: auto;
     max-height: 340px;
     object-fit: contain;
-    object-position: center center;
+    object-position: center top;
     border: none;
     background: transparent;
     filter: none;
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
     animation: fadeUp 0.8s ease both;
     animation-delay: 0.15s;
   }
@@ -494,17 +494,17 @@
   .hero-layout {
     display: flex;
     align-items: flex-start;
-    gap: 0px;
+    gap: 12px;
   }
 
   .hero-figure {
     flex-shrink: 0;
-    width: 400px;
+    width: 300px;
+    margin-top: -20px;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    margin-top: -60px;
     animation: fadeUp 0.8s ease both;
     animation-delay: 0.15s;
   }
@@ -554,9 +554,6 @@
 
   .hero-content {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
 
   /* SCANLINE EFFECT ON HERO */
@@ -594,6 +591,7 @@
     footer { padding: 24px; }
   }
 </style>
+  <link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,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">
 </head>
 <body>
 
@@ -620,7 +618,7 @@
       <h1 class="hero-name">
         Gabriel
       </h1>
-      <p class="hero-sub">Junior Sysadmin in the making. Building real infrastructure, one lab at a time.</p>
+      <p class="hero-sub">Packets don't lie. Neither does my lab. I build, break, troubleshoot and document everything. Real network infrastructure, real lab. CCNA in progress.</p>
 
       <div class="hero-meta">
         <div class="meta-item">
@@ -637,7 +635,7 @@
         </div>
         <div class="meta-item">
           <span class="meta-label">GitHub</span>
-          <span class="meta-value"><a href="https://github.com/gbrgabe" style="color:var(--orange);text-decoration:none;">gbrgabe</a></span>
+          <span class="meta-value"><a href="https://github.com/gbrgabe?tab=repositories" style="color:var(--orange);text-decoration:none;">gbrgabe</a></span>
         </div>
       </div>
     </div>
@@ -675,11 +673,11 @@
   const BR_SHAPE = [
     [0.08,0.18],[0.12,0.10],[0.20,0.06],[0.28,0.04],[0.34,0.08],
     [0.36,0.14],[0.32,0.20],[0.30,0.28],[0.34,0.34],[0.38,0.30],
-    [0.40,0.36],[0.38,0.44],[0.34,0.50],[0.30,0.58],[0.28,0.68],
-    [0.24,0.76],[0.20,0.84],[0.16,0.92],[0.12,0.84],[0.10,0.72],
-    [0.08,0.60],[0.06,0.48],[0.06,0.38],[0.06,0.28],
+    [0.40,0.36],[0.38,0.44],[0.34,0.50],[0.30,0.58],[0.28,0.66],
+    [0.24,0.72],[0.20,0.76],[0.16,0.80],[0.12,0.74],[0.10,0.66],
+    [0.08,0.58],[0.06,0.48],[0.06,0.38],[0.06,0.28],
     // interior nodes
-    [0.18,0.30],[0.24,0.22],[0.28,0.40],[0.20,0.52],[0.26,0.62],
+    [0.18,0.30],[0.24,0.22],[0.28,0.40],[0.20,0.52],[0.26,0.60],
   ];
 
   // Ireland: compact shape, right half of canvas
@@ -737,35 +735,20 @@
     spawnInternalHandshakes(brNodes, 0, 3);
     spawnInternalHandshakes(ieNodes, 1200, 2);
 
-    // Cross-ocean packets: multiple BR↔IE connections
-    // Pick 3 different anchor pairs for varied ocean routes
-    const brRight  = brNodes.reduce((a,b) => a.x > b.x ? a : b);   // rightmost BR
-    const brMid    = brNodes[3];                                      // NE coast BR
-    const brNorth  = brNodes[1];                                      // north BR
-    const ieMid    = ieNodes[6];                                      // west IE
-    const ieSouth  = ieNodes[9];                                      // south IE
-    const ieNorth  = ieNodes[3];                                      // north IE
+    // Cross-ocean packets: BR → IE and IE → BR
+    const brAnchor = brNodes[3];  // right side of Brazil
+    const ieAnchor = ieNodes[6];  // left side of Ireland
+    const brIdx = nodes.indexOf(brAnchor);
+    const ieIdx = nodes.indexOf(ieAnchor);
 
-    const brRIdx = nodes.indexOf(brRight);
-    const brMIdx = nodes.indexOf(brMid);
-    const brNIdx = nodes.indexOf(brNorth);
-    const ieMIdx = nodes.indexOf(ieMid);
-    const ieSIdx = nodes.indexOf(ieSouth);
-    const ieNIdx = nodes.indexOf(ieNorth);
-
-    // Route 1: main handshake (NE Brazil → West Ireland)
-    spawnPacket(brMIdx, ieMIdx, 'SYN',     RED,    400);
-    spawnPacket(ieMIdx, brMIdx, 'SYN-ACK', ORANGE, 1800);
-    spawnPacket(brMIdx, ieMIdx, 'ACK',     RED,    3200);
-
-    // Route 2: data stream (rightmost BR → South Ireland), offset timing
-    spawnPacket(brRIdx, ieSIdx, 'DATA',    ORANGE, 2600);
-    spawnPacket(ieSIdx, brRIdx, 'ACK',     RED,    4400);
-    spawnPacket(brRIdx, ieSIdx, 'DATA',    ORANGE, 6000);
-
-    // Route 3: north link (North BR → North Ireland)
-    spawnPacket(brNIdx, ieNIdx, 'SYN',     RED,    1200);
-    spawnPacket(ieNIdx, brNIdx, 'SYN-ACK', ORANGE, 3000);
+    // SYN BR→IE
+    spawnPacket(brIdx, ieIdx, 'SYN',     RED,    600);
+    // SYN-ACK IE→BR
+    spawnPacket(ieIdx, brIdx, 'SYN-ACK', ORANGE, 2200);
+    // ACK BR→IE
+    spawnPacket(brIdx, ieIdx, 'ACK',     RED,    3800);
+    // DATA IE→BR
+    spawnPacket(ieIdx, brIdx, 'DATA',    ORANGE, 5200);
   }
 
   function spawnInternalHandshakes(cluster, baseDelay, count) {
@@ -810,7 +793,7 @@
       ctx.globalAlpha = 1;
     });
 
-        // Nodes
+    // Nodes
     nodes.forEach(n => {
       const pulse = 0.5 + 0.5 * Math.sin(time * 1.1 + n.pulse);
       ctx.beginPath();
@@ -824,28 +807,6 @@
       ctx.fillStyle = '#2e2e2e';
       ctx.globalAlpha = 0.9;
       ctx.fill();
-      ctx.globalAlpha = 1;
-    });
-
-    // Static dashed ocean lines — always visible
-    let crossPairs = new Set();
-    packets.forEach(p => {
-      if (!p.cross) return;
-      const key = [Math.min(p.fromIdx,p.toIdx), Math.max(p.fromIdx,p.toIdx)].join('-');
-      if (crossPairs.has(key)) return;
-      crossPairs.add(key);
-      const a = nodes[p.fromIdx], b = nodes[p.toIdx];
-      const mx = (a.x + b.x) / 2;
-      const my = (a.y + b.y) / 2 - canvas.height * 0.22;
-      ctx.beginPath();
-      ctx.moveTo(a.x, a.y);
-      ctx.quadraticCurveTo(mx, my, b.x, b.y);
-      ctx.strokeStyle = '#1e1e1e';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 6]);
-      ctx.globalAlpha = 0.4;
-      ctx.stroke();
-      ctx.setLineDash([]);
       ctx.globalAlpha = 1;
     });
 
@@ -934,10 +895,8 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="section-tag">001 — about</div>
-  <h2 class="section-title">Who I am</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I'm Gabriel. Currently based in Brazil, heading to Dublin in late 2026 to start my career in IT infrastructure.</p>
       <p>I learn by doing. My homelab is a <strong>hybrid Proxmox environment</strong> running real infrastructure: OPNsense as a router/firewall, Windows Server Core with Active Directory, DNS, DHCP — all documented on GitHub.</p>
       <p>No prior professional experience. What I have instead: <strong>hands-on lab work, honest documentation, and the ability to follow through</strong> on whatever I don't know yet.</p>
       <p>Long-term path: network infrastructure → cybersecurity.</p>
@@ -965,15 +924,127 @@
       </div>
       <div class="stat-row">
         <span class="stat-key">Target role</span>
-        <span class="stat-val">Junior Sysadmin · Helpdesk</span>
+        <span class="stat-val">Junior Sysadmin</span>
       </div>
     </div>
   </div>
 </section>
 
+<!-- REPOS -->
+<section id="repos">
+  <div class="section-tag">002 — repos</div>
+  <h2 class="section-title">Lab Docs</h2>
+  <div class="lab-grid">
+
+    <div class="lab-card repo-card" id="card-sysadmin" data-url="https://github.com/gbrgabe/sysadmin-lab" style="cursor:pointer;">
+      <div class="card-status status-done"><span class="pulse-dot"></span> documented</div>
+      <div class="card-title">sysadmin-lab ↗</div>
+      <div class="card-desc">Windows Server 2022 Core homelab. DC01 running AD DS, DNS with forwarders, DHCP scope. GLPI ticketing with MariaDB. Domain: office.lab.</div>
+      <div class="card-tags">
+        <span class="tag">Windows Server</span>
+        <span class="tag">AD DS</span>
+        <span class="tag">DNS</span>
+        <span class="tag">DHCP</span>
+        <span class="tag">GLPI</span>
+        <span class="tag">PowerShell</span>
+      </div>
+    </div>
+
+    <div class="lab-card repo-card" id="card-networking" data-url="https://github.com/gbrgabe/networking-lab" style="cursor:pointer;">
+      <div class="card-status status-done"><span class="pulse-dot"></span> documented</div>
+      <div class="card-title">networking-lab ↗</div>
+      <div class="card-desc">Packet Tracer simulations + real office lab networking. OPNsense firewall, DNS forwarders, DHCP on DC01. CCNA concepts applied hands-on.</div>
+      <div class="card-tags">
+        <span class="tag">Packet Tracer</span>
+        <span class="tag">OPNsense</span>
+        <span class="tag">TCP/IP</span>
+        <span class="tag">DNS</span>
+        <span class="tag">CCNA</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<canvas id="overlay-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;"></canvas>
+<script>
+(function() {
+  const overlay = document.getElementById('overlay-canvas');
+  const ctx2 = overlay.getContext('2d');
+  let animating = false;
+  function resize() { overlay.width = window.innerWidth; overlay.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  function runSysadmin(url) {
+    if (animating) return; animating = true; overlay.style.display = 'block';
+    const lines = ['> init connection......','> target: DC01 · 10.0.0.1','> AUTH REQUEST ········','> LDAP BIND · office.lab','> AUTH OK ✓','> opening repo...'];
+    const W=overlay.width,H=overlay.height,x=W/2-160,y=H/2-lines.length*13;
+    let li=0,ci=0,done=[],finished=false,finTs=0;
+    function tick(ts) {
+      ctx2.clearRect(0,0,W,H);
+      ctx2.fillStyle='rgba(10,10,10,0.85)'; ctx2.fillRect(0,0,W,H);
+      ctx2.strokeStyle='#e8321a'; ctx2.lineWidth=1; ctx2.globalAlpha=0.5;
+      ctx2.strokeRect(x-20,y-20,360,lines.length*26+40); ctx2.globalAlpha=1;
+      ctx2.font='13px "Space Mono",monospace'; ctx2.textBaseline='top';
+      done.forEach((l,i)=>{ ctx2.fillStyle=i===done.length-1&&!finished?'#e8321a':'#555'; ctx2.fillText(l,x,y+i*26); });
+      if (!finished) {
+        ci++; const cur=lines[li].slice(0,ci);
+        ctx2.fillStyle='#e8321a'; ctx2.fillText(cur+(Math.floor(ts/200)%2===0?'█':''),x,y+li*26);
+        if (ci>=lines[li].length) { done.push(lines[li]); li++; ci=0; if(li>=lines.length){finished=true;finTs=ts;} }
+        requestAnimationFrame(tick);
+      } else {
+        ctx2.fillStyle='#4af'; ctx2.fillText('> CONNECTION ESTABLISHED',x,y+lines.length*26);
+        if (ts-finTs>600) { overlay.style.display='none'; animating=false; window.open(url,'_blank'); }
+        else requestAnimationFrame(tick);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function runNetworking(url) {
+    if (animating) return; animating = true; overlay.style.display = 'block';
+    const W=overlay.width,H=overlay.height,cx=W*0.15,sx=W*0.85,my=H/2;
+    const RED='#e8321a',OR='#f07830';
+    const seq=[{f:0,t:1,l:'SYN',c:RED,s:0},{f:1,t:0,l:'SYN-ACK',c:OR,s:700},{f:0,t:1,l:'ACK',c:RED,s:1400},{f:0,t:1,l:'GET /repo',c:OR,s:2000}];
+    const nodes=[{x:cx,y:my,lb:'CLIENT'},{x:sx,y:my,lb:'SERVER'}];
+    let st=null;
+    function tick(ts) {
+      if(!st) st=ts; const el=(ts-st)/1000;
+      ctx2.clearRect(0,0,W,H); ctx2.fillStyle='rgba(10,10,10,0.85)'; ctx2.fillRect(0,0,W,H);
+      nodes.forEach(n=>{
+        ctx2.beginPath(); ctx2.moveTo(n.x,my-120); ctx2.lineTo(n.x,my+120);
+        ctx2.strokeStyle='#2a2a2a'; ctx2.setLineDash([4,4]); ctx2.stroke(); ctx2.setLineDash([]);
+        ctx2.strokeStyle='#333'; ctx2.strokeRect(n.x-40,my-145,80,28);
+        ctx2.fillStyle='#111'; ctx2.fillRect(n.x-39,my-144,78,26);
+        ctx2.fillStyle='#555'; ctx2.font='10px "Space Mono",monospace';
+        ctx2.textAlign='center'; ctx2.textBaseline='middle'; ctx2.fillText(n.lb,n.x,my-131);
+      });
+      let all=true;
+      seq.forEach((p,i)=>{
+        const t=el-p.s/1000; if(t<0){all=false;return;}
+        const pr=Math.min(t*0.9,1); if(pr>=1) return; all=false;
+        const a=nodes[p.f],b=nodes[p.t],ry=my-60+i*40,px=a.x+(b.x-a.x)*pr;
+        ctx2.beginPath(); ctx2.moveTo(a.x,ry); ctx2.lineTo(b.x,ry);
+        ctx2.strokeStyle='#1e1e1e'; ctx2.lineWidth=1; ctx2.stroke();
+        ctx2.fillStyle='rgba(10,10,10,0.9)'; ctx2.fillRect(px-26,ry-9,52,18);
+        ctx2.strokeStyle=p.c; ctx2.strokeRect(px-26,ry-9,52,18);
+        ctx2.fillStyle=p.c; ctx2.font='8px "Space Mono",monospace';
+        ctx2.textAlign='center'; ctx2.textBaseline='middle'; ctx2.fillText(p.l,px,ry);
+      });
+      if(all&&el>3.2){overlay.style.display='none';animating=false;window.open(url,'_blank');}
+      else requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  document.getElementById('card-sysadmin').addEventListener('click',function(){runSysadmin(this.dataset.url);});
+  document.getElementById('card-networking').addEventListener('click',function(){runNetworking(this.dataset.url);});
+})();
+</script>
+
 <!-- LAB -->
 <section id="lab">
-  <div class="section-tag">002 — lab</div>
+  <div class="section-tag">003 — lab</div>
   <h2 class="section-title">Hybrid Homelab</h2>
   <div class="lab-grid">
 
@@ -1003,7 +1074,7 @@
     </div>
 
     <div class="lab-card">
-      <div class="card-status status-wip">· planned</div>
+      <div class="card-status status-wip">· in progress</div>
       <div class="card-title">SRV-MON</div>
       <div class="card-desc">Ubuntu VM for monitoring stack. Zabbix + Grafana via Docker. Network and service observability for the entire lab environment.</div>
       <div class="card-tags">
@@ -1015,7 +1086,7 @@
     </div>
 
     <div class="lab-card">
-      <div class="card-status status-wip">· planned</div>
+      <div class="card-status status-wip">· in progress</div>
       <div class="card-title">SRV-APPS</div>
       <div class="card-desc">Ubuntu VM for GLPI + MariaDB. IT asset management and service desk simulation — directly relevant to Helpdesk and Junior Sysadmin roles.</div>
       <div class="card-tags">
@@ -1030,8 +1101,7 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-tag">003 — skills</div>
-
+  <div class="section-tag">004 — skills</div>
   <h2 class="section-title">Stack</h2>
   <div class="skills-grid">
 
@@ -1040,10 +1110,9 @@
       <ul class="skill-list">
         <li class="skill-item">Proxmox VE <span class="badge active">hands-on</span></li>
         <li class="skill-item">Windows Server 2022 Core <span class="badge active">hands-on</span></li>
-        <li class="skill-item">Active Directory / GPO <span class="badge active">hands-on</span></li>
         <li class="skill-item">DNS / DHCP <span class="badge active">hands-on</span></li>
         <li class="skill-item">Linux (Ubuntu) <span class="badge active">hands-on</span></li>
-        <li class="skill-item">PowerShell <span class="badge">learning</span></li>
+        <li class="skill-item">Active Directory / GPO <span class="badge active">hands-on</span></li>
       </ul>
     </div>
 
@@ -1051,288 +1120,39 @@
       <div class="skill-group-title">Networking</div>
       <ul class="skill-list">
         <li class="skill-item">CCNA <span class="badge active">studying</span></li>
-        <li class="skill-item">MS-102 <span class="badge active">studying</span></li>
         <li class="skill-item">OPNsense / pfSense <span class="badge active">hands-on</span></li>
         <li class="skill-item">TCP/IP · VLANs · Routing <span class="badge">learning</span></li>
         <li class="skill-item">Packet Tracer <span class="badge active">hands-on</span></li>
-        <li class="skill-item">Wireshark <span class="badge active">hands-on</span></li>
+        <li class="skill-item">Wireshark <span class="badge">learning</span></li>
       </ul>
     </div>
 
     <div>
-      <div class="skill-group-title">Security & Tools</div>
+      <div class="skill-group-title">Cloud</div>
       <ul class="skill-list">
-        <li class="skill-item">Kali Linux <span class="badge">learning</span></li>
-        <li class="skill-item">Burp Suite <span class="badge">learning</span></li>
-        <li class="skill-item">TryHackMe / HTB <span class="badge active">active</span></li>
-        <li class="skill-item">Git / GitHub <span class="badge active">hands-on</span></li>
+        <li class="skill-item">MS-102 · M365 Admin <span class="badge active">studying</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="skill-group-title">Scripting &amp; Automation</div>
+      <ul class="skill-list">
+        <li class="skill-item">PowerShell <span class="badge">learning</span></li>
+        <li class="skill-item">Python <span class="badge">learning</span></li>
         <li class="skill-item">Docker <span class="badge">learning</span></li>
       </ul>
     </div>
 
-  </div>
-</section>
-
-<!-- REPOS -->
-<section id="repos">
-  <div class="section-tag">004 — repos</div>
-  <h2 class="section-title">Lab Docs</h2>
-  <div class="lab-grid">
-
-    <div class="lab-card repo-card" id="card-sysadmin" data-url="https://github.com/gbrgabe/sysadmin-lab" style="cursor:pointer;">
-      <div class="card-status status-done"><span class="pulse-dot"></span> documented</div>
-      <div class="card-title">sysadmin-lab ↗</div>
-      <div class="card-desc">Windows Server 2022 Core homelab. DC01 running AD DS, DNS with forwarders, DHCP scope. GLPI ticketing with MariaDB. Domain: office.lab. Full setup documented step by step.</div>
-      <div class="card-tags">
-        <span class="tag">Windows Server</span>
-        <span class="tag">AD DS</span>
-        <span class="tag">DNS</span>
-        <span class="tag">DHCP</span>
-        <span class="tag">GLPI</span>
-        <span class="tag">PowerShell</span>
-      </div>
-    </div>
-
-    <div class="lab-card repo-card" id="card-networking" data-url="https://github.com/gbrgabe/networking-lab" style="cursor:pointer;">
-      <div class="card-status status-done"><span class="pulse-dot"></span> documented</div>
-      <div class="card-title">networking-lab ↗</div>
-      <div class="card-desc">Packet Tracer simulations + real office lab networking. OPNsense firewall, DNS forwarders, DHCP on DC01. CCNA concepts applied hands-on.</div>
-      <div class="card-tags">
-        <span class="tag">Packet Tracer</span>
-        <span class="tag">OPNsense</span>
-        <span class="tag">TCP/IP</span>
-        <span class="tag">DNS</span>
-        <span class="tag">CCNA</span>
-      </div>
+    <div>
+      <div class="skill-group-title">Security</div>
+      <ul class="skill-list">
+        <li class="skill-item">Kali Linux <span class="badge">learning</span></li>
+        <li class="skill-item">Burp Suite <span class="badge">learning</span></li>
+        <li class="skill-item">TryHackMe / HTB <span class="badge active">active</span></li>
+      </ul>
     </div>
 
   </div>
-</section>
-
-<!-- REPO CLICK ANIMATIONS -->
-<canvas id="overlay-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;"></canvas>
-
-<script>
-(function() {
-  const overlay = document.getElementById('overlay-canvas');
-  const ctx2    = overlay.getContext('2d');
-  let animating = false;
-
-  function resize() {
-    overlay.width  = window.innerWidth;
-    overlay.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // ── SYSADMIN: terminal auth animation ─────────────────────
-  function runSysadmin(targetUrl) {
-    if (animating) return;
-    animating = true;
-    overlay.style.display = 'block';
-
-    const lines = [
-      '> init connection......',
-      '> target: DC01 · 10.0.0.1',
-      '> AUTH REQUEST ········',
-      '> LDAP BIND · office.lab',
-      '> AUTH OK ✓',
-      '> opening repo...',
-    ];
-
-    const W = overlay.width, H = overlay.height;
-    const x = W / 2 - 160;
-    let y = H / 2 - (lines.length * 22) / 2;
-    let lineIdx = 0;
-    let charIdx = 0;
-    let displayed = [];
-    let done = false;
-    let doneTimer = 0;
-
-    function tick(ts) {
-      ctx2.clearRect(0, 0, W, H);
-      // dark overlay
-      ctx2.fillStyle = 'rgba(10,10,10,0.82)';
-      ctx2.fillRect(0, 0, W, H);
-      // terminal box
-      ctx2.strokeStyle = '#e8321a';
-      ctx2.lineWidth = 1;
-      ctx2.globalAlpha = 0.6;
-      ctx2.strokeRect(x - 20, y - 20, 360, lines.length * 26 + 40);
-      ctx2.globalAlpha = 1;
-
-      // draw completed lines
-      ctx2.font = '13px "Space Mono", monospace';
-      ctx2.textBaseline = 'top';
-      displayed.forEach((line, i) => {
-        ctx2.fillStyle = i === displayed.length - 1 && !done ? '#e8321a' : '#666';
-        ctx2.fillText(line, x, y + i * 26);
-      });
-
-      if (!done) {
-        // type current line
-        if (lineIdx < lines.length) {
-          charIdx++;
-          const current = lines[lineIdx].slice(0, charIdx);
-          ctx2.fillStyle = '#e8321a';
-          ctx2.fillText(current + (Math.floor(ts/200)%2===0?'█':''), x, y + lineIdx * 26);
-          if (charIdx >= lines[lineIdx].length) {
-            displayed.push(lines[lineIdx]);
-            lineIdx++;
-            charIdx = 0;
-            if (lineIdx >= lines.length) { done = true; doneTimer = ts; }
-          }
-        }
-        requestAnimationFrame(tick);
-      } else {
-        // flash green on last line then redirect
-        ctx2.fillStyle = '#4af';
-        ctx2.fillText('> CONNECTION ESTABLISHED', x, y + (lines.length) * 26);
-        if (ts - doneTimer > 600) {
-          overlay.style.display = 'none';
-          animating = false;
-          window.open(targetUrl, '_blank');
-        } else {
-          requestAnimationFrame(tick);
-        }
-      }
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // ── NETWORKING: TCP handshake animation ───────────────────
-  function runNetworking(targetUrl) {
-    if (animating) return;
-    animating = true;
-    overlay.style.display = 'block';
-
-    const W = overlay.width, H = overlay.height;
-    const clientX = W * 0.15, serverX = W * 0.85;
-    const midY    = H / 2;
-    const RED = '#e8321a', ORANGE = '#f07830';
-
-    // nodes: client left, server right
-    const nodes2 = [
-      { x: clientX, y: midY, label: 'CLIENT' },
-      { x: serverX, y: midY, label: 'SERVER' },
-    ];
-
-    // handshake packets
-    const sequence = [
-      { from: 0, to: 1, label: 'SYN',     color: RED,    startMs: 0    },
-      { from: 1, to: 0, label: 'SYN-ACK', color: ORANGE, startMs: 700  },
-      { from: 0, to: 1, label: 'ACK',     color: RED,    startMs: 1400 },
-      { from: 0, to: 1, label: 'GET /repo',color: ORANGE, startMs: 2000 },
-    ];
-
-    let packets2 = sequence.map(s => ({
-      ...s,
-      t: -s.startMs / 1000,
-      speed: 0.9,
-      done: false
-    }));
-
-    let startTs = null;
-
-    function tick(ts) {
-      if (!startTs) startTs = ts;
-      const dt = Math.min((ts - (startTs + (ts - startTs - (ts-startTs))) ) / 1000, 0.05);
-      // simpler: use elapsed
-      const elapsed = (ts - startTs) / 1000;
-
-      ctx2.clearRect(0, 0, W, H);
-      ctx2.fillStyle = 'rgba(10,10,10,0.82)';
-      ctx2.fillRect(0, 0, W, H);
-
-      // vertical lines for client/server
-      nodes2.forEach(n => {
-        ctx2.beginPath();
-        ctx2.moveTo(n.x, midY - 120);
-        ctx2.lineTo(n.x, midY + 120);
-        ctx2.strokeStyle = '#2a2a2a';
-        ctx2.lineWidth = 1;
-        ctx2.setLineDash([4, 4]);
-        ctx2.stroke();
-        ctx2.setLineDash([]);
-
-        // node box
-        const bw = 80, bh = 28;
-        ctx2.strokeStyle = '#333';
-        ctx2.lineWidth = 1;
-        ctx2.strokeRect(n.x - bw/2, midY - 140, bw, bh);
-        ctx2.fillStyle = '#111';
-        ctx2.fillRect(n.x - bw/2 + 1, midY - 139, bw - 2, bh - 2);
-        ctx2.fillStyle = '#555';
-        ctx2.font = '10px "Space Mono", monospace';
-        ctx2.textAlign = 'center';
-        ctx2.textBaseline = 'middle';
-        ctx2.fillText(n.label, n.x, midY - 126);
-      });
-
-      // draw packets
-      let allDone = true;
-      packets2.forEach((p, pi) => {
-        p.t = elapsed - sequence[pi].startMs / 1000;
-        if (p.t < 0) { allDone = false; return; }
-        if (p.t * p.speed >= 1) { p.done = true; return; }
-        allDone = false;
-
-        const progress = Math.min(p.t * p.speed, 1);
-        const a = nodes2[p.from], b = nodes2[p.to];
-        const rowY = midY - 60 + pi * 40;
-        const px2  = a.x + (b.x - a.x) * progress;
-
-        // arrow line
-        ctx2.beginPath();
-        ctx2.moveTo(a.x, rowY);
-        ctx2.lineTo(b.x, rowY);
-        ctx2.strokeStyle = '#1e1e1e';
-        ctx2.lineWidth = 1;
-        ctx2.stroke();
-
-        // arrowhead
-        const dir = b.x > a.x ? 1 : -1;
-        ctx2.beginPath();
-        ctx2.moveTo(b.x, rowY);
-        ctx2.lineTo(b.x - dir*8, rowY - 4);
-        ctx2.lineTo(b.x - dir*8, rowY + 4);
-        ctx2.fillStyle = '#2a2a2a';
-        ctx2.fill();
-
-        // packet box
-        const bw = 52, bh = 18;
-        ctx2.fillStyle = 'rgba(10,10,10,0.9)';
-        ctx2.fillRect(px2 - bw/2, rowY - bh/2, bw, bh);
-        ctx2.strokeStyle = p.color;
-        ctx2.lineWidth = 1;
-        ctx2.strokeRect(px2 - bw/2, rowY - bh/2, bw, bh);
-        ctx2.fillStyle = p.color;
-        ctx2.font = '8px "Space Mono", monospace';
-        ctx2.textAlign = 'center';
-        ctx2.textBaseline = 'middle';
-        ctx2.fillText(p.label, px2, rowY);
-      });
-
-      if (allDone && elapsed > 3.2) {
-        overlay.style.display = 'none';
-        animating = false;
-        window.open(targetUrl, '_blank');
-      } else {
-        requestAnimationFrame(tick);
-      }
-    }
-    requestAnimationFrame(tick);
-  }
-
-  // ── Attach click handlers ─────────────────────────────────
-  document.getElementById('card-sysadmin').addEventListener('click', function() {
-    runSysadmin(this.dataset.url);
-  });
-  document.getElementById('card-networking').addEventListener('click', function() {
-    runNetworking(this.dataset.url);
-  });
-})();
-</script>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -1352,14 +1172,14 @@
     <a href="mailto:contact@n1ll.dev" class="contact-link">
       <div>
         <div class="link-label">Email</div>
-        <div class="link-value">contact@n1ll.dev</div>
+        <div class="link-value">gbrgabe5@gmail.com</div>
       </div>
       <span class="link-arrow">↗</span>
     </a>
     <a href="https://linkedin.com" target="_blank" class="contact-link">
       <div>
         <div class="link-label">LinkedIn</div>
-        <div class="link-value">/in/gabriel</div>
+        <div class="link-value">/in/gabrielgomes</div>
       </div>
       <span class="link-arrow">↗</span>
     </a>
@@ -1371,7 +1191,10 @@
   <span class="right">Brazil → Dublin, IE · Sep / Oct 2026</span>
 </footer>
 
+
+<footer>
+  <span>epi.n1ll · gabriel · 2026</span>
+  <span class="right">Brazil → Dublin, IE · Sep / Oct 2026</span>
+</footer>
 </body>
-<!-- build2: 1780623627 -->
-<!-- build: 1780623513 -->
 </html>
